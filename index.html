@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Portafolio Web</title>
+    <meta name="description" content="Portafolio de Sebastián Posada, estudiante de Ingeniería de Software, Desaroollo web. Proyectos y contacto.">
+    <meta name="theme-color" content="#0f172a">
+    <meta property="og:title" content="Sebastián Posada | Portafolio">
+    <meta property="og:description" content="Estudiante de Ingeniería de Software. Mira mis proyectos y contáctame.">
+    <meta property="og:type" content="website">
+
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230f172a'/><text x='50' y='66' font-size='46' font-family='Arial' font-weight='700' text-anchor='middle' fill='%2338bdf8'>SP</text></svg>">
+    <link rel="stylesheet" href="estilos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+<a class="skip" href="#contenido">Saltar al contenido</a>
+
+<!-- NAVBAR -->
+<nav id="navbar" aria-label="Navegación principal">
+    <a href="#inicio" class="logo">Portafolio<span>.</span></a>
+    <button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu">
+        <i class="fa-solid fa-bars"></i>
+    </button>
+    <ul id="menu">
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#sobre-mi">Sobre mí</a></li>
+        <li><a href="#proyectos">Proyectos</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+        <li>
+            <button class="icon-btn" id="temaBtn" aria-label="Cambiar tema claro/oscuro" title="Cambiar tema">
+                <i class="fa-solid fa-moon"></i>
+            </button>
+        </li>
+    </ul>
+</nav>
+
+<main id="contenido">
+
+<!-- INICIO -->
+<header id="inicio" class="hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+
+    <div class="hero-inner">
+        <div class="hero-content">
+            <p class="saludo">Hola, soy</p>
+            <h1>Sebastián Posada</h1>
+            <p class="rol">Estudiante de Ingeniería de Software<br>
+                <span class="typing" id="typing" aria-live="off"></span></p>
+            <div class="hero-btns">
+                <a href="#proyectos" class="btn">Ver proyectos</a>
+                <a href="#contacto" class="btn btn-outline">Contáctame</a>
+            </div>
+        </div>
+
+        <div class="foto-perfil">
+            <img id="fotoPerfil" src="img/perfil.jpg" alt="Foto de Sebastián Posada" width="200" height="200">
+            <div class="foto-fallback" id="fotoFallback" hidden>SP</div>
+        </div>
+    </div>
+
+    <div class="redes-fijas" id="redes" aria-label="Redes sociales"></div>
+    <a href="#sobre-mi" class="scroll-hint" aria-label="Bajar"><i class="fa-solid fa-chevron-down"></i></a>
+</header>
+
+<!-- SOBRE MÍ -->
+<section id="sobre-mi" class="seccion">
+    <div class="contenedor">
+        <h2 class="titulo reveal">Sobre mí</h2>
+        <div class="sobre-grid">
+            <p class="reveal">
+                Soy estudiante de Ingeniería de Software, apasionado por el desarrollo web,
+                la programación y la creación de soluciones digitales modernas. Me gusta
+                aprender construyendo: cada proyecto es una oportunidad para mejorar mi código
+                y entender mejor cómo se hacen los productos reales.
+            </p>
+            <div class="habilidades reveal" id="habilidades">
+                <span><i class="fa-brands fa-html5"></i> HTML</span>
+                <span><i class="fa-brands fa-css3-alt"></i> CSS</span>
+                <span><i class="fa-brands fa-js"></i> JavaScript</span>
+                <span><i class="fa-brands fa-git-alt"></i> Git</span>
+                <span><i class="fa-solid fa-database"></i> MySQL</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PROYECTOS -->
+<section id="proyectos" class="seccion alt">
+    <div class="contenedor">
+        <h2 class="titulo reveal">Proyectos</h2>
+
+        <div class="proy-barra reveal">
+            <div class="filtros" id="filtros" role="group" aria-label="Filtrar proyectos"></div>
+            <button class="btn btn-sm admin-only" id="nuevoBtn" hidden>
+                <i class="fa-solid fa-plus"></i> Nuevo proyecto
+            </button>
+        </div>
+
+        <!-- Panel de administración (solo visible en modo admin) -->
+        <div class="admin-panel admin-only" id="adminPanel" hidden>
+            <p><i class="fa-solid fa-lock-open"></i> <strong>Modo administrador.</strong>
+               Los cambios se guardan en este navegador. Para publicarlos, pulsa <em>Exportar</em> y reemplaza
+               <code>data/proyectos.js</code> en tu repositorio.</p>
+            <div class="admin-acciones">
+                <button class="btn btn-sm btn-outline" id="exportarBtn"><i class="fa-solid fa-download"></i> Exportar</button>
+                <button class="btn btn-sm btn-outline" id="importarBtn"><i class="fa-solid fa-upload"></i> Importar</button>
+                <button class="btn btn-sm btn-outline" id="restaurarBtn"><i class="fa-solid fa-rotate-left"></i> Restaurar</button>
+                <input type="file" id="importarInput" accept=".js,.json,application/json" hidden>
+            </div>
+        </div>
+
+        <div class="proyectos-grid" id="proyectosGrid" aria-live="polite"></div>
+        <p class="vacio" id="proyectosVacio" hidden>Aún no hay proyectos en esta categoría.</p>
+    </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto" class="seccion">
+    <div class="contenedor estrecho">
+        <h2 class="titulo reveal">Contacto</h2>
+        <p class="sub reveal">¿Tienes una idea, una oportunidad o solo quieres saludar? Escríbeme.</p>
+
+        <form id="formContacto" class="reveal" novalidate>
+            <div class="campo">
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" name="nombre" autocomplete="name" required minlength="2" maxlength="80">
+                <small class="error" data-for="nombre"></small>
+            </div>
+            <div class="campo">
+                <label for="correo">Correo</label>
+                <input type="email" id="correo" name="correo" autocomplete="email" required maxlength="120">
+                <small class="error" data-for="correo"></small>
+            </div>
+            <div class="campo">
+                <label for="mensaje">Mensaje</label>
+                <textarea id="mensaje" name="mensaje" rows="5" required minlength="10" maxlength="1500"></textarea>
+                <small class="error" data-for="mensaje"></small>
+            </div>
+            <!-- Honeypot anti-spam: los humanos no lo ven -->
+            <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="hp" aria-hidden="true">
+            <button type="submit" class="btn" id="enviarBtn">Enviar mensaje</button>
+        </form>
+    </div>
+</section>
+
+</main>
+
+<footer>
+    <p>© <span id="anio"></span> Sebastián Posada </p>
+    <button class="link-btn" id="adminToggle" title="Administrar proyectos">
+        <i class="fa-solid fa-lock"></i> <span>Administrar</span>
+    </button>
+</footer>
+
+<!-- MODAL: crear / editar proyecto -->
+<dialog id="modalProyecto" aria-labelledby="modalTitulo">
+    <form method="dialog" id="formProyecto" novalidate>
+        <div class="modal-head">
+            <h3 id="modalTitulo">Nuevo proyecto</h3>
+            <button type="button" class="icon-btn" data-cerrar aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+        <div class="campo">
+            <label for="pTitulo">Título *</label>
+            <input type="text" id="pTitulo" required maxlength="80">
+        </div>
+        <div class="campo">
+            <label for="pDesc">Descripción *</label>
+            <textarea id="pDesc" rows="3" required maxlength="400"></textarea>
+        </div>
+        <div class="campo">
+            <label for="pTags">Tecnologías (separadas por coma)</label>
+            <input type="text" id="pTags" placeholder="HTML, CSS, JavaScript">
+        </div>
+        <div class="fila">
+            <div class="campo">
+                <label for="pDemo">Enlace demo</label>
+                <input type="url" id="pDemo" placeholder="https://...">
+            </div>
+            <div class="campo">
+                <label for="pRepo">Enlace código (GitHub)</label>
+                <input type="url" id="pRepo" placeholder="https://github.com/...">
+            </div>
+        </div>
+        <div class="campo">
+            <label for="pImgFile">Imagen (captura del proyecto)</label>
+            <input type="file" id="pImgFile" accept="image/*">
+            <div class="img-preview" id="imgPreview" hidden>
+                <img alt="Vista previa" id="imgPreviewImg">
+                <button type="button" class="link-btn" id="quitarImg">Quitar imagen</button>
+            </div>
+            <small class="ayuda">Se redimensiona automáticamente. También puedes escribir una ruta (ej. <code>img/mi-proyecto.jpg</code>) o URL:</small>
+            <input type="text" id="pImgUrl" placeholder="img/mi-proyecto.jpg o https://...">
+        </div>
+        <small class="error" id="modalError"></small>
+
+        <div class="modal-pie">
+            <button type="button" class="btn btn-outline btn-sm" data-cerrar>Cancelar</button>
+            <button type="submit" class="btn btn-sm">Guardar</button>
+        </div>
+    </form>
+</dialog>
+
+<div id="toasts" role="status" aria-live="polite"></div>
+
+<script src="data/proyectos.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
