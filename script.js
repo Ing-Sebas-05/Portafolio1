@@ -167,7 +167,11 @@ function cargarProyectos() {
 
 let proyectos = cargarProyectos();
 let filtroActual = "Todos";
-let modoAdmin = store.get(CLAVE_ADMIN) === "1" || new URLSearchParams(location.search).has("admin");
+
+// El modo admin solo se activa entrando una vez con ?admin en la dirección (queda recordado en este navegador)
+if (new URLSearchParams(location.search).has("admin")) store.set(CLAVE_ADMIN, "1");
+let modoAdmin = store.get(CLAVE_ADMIN) === "1";
+
 let editandoId = null;
 let imagenData = ""; // imagen subida (dataURL) del formulario
 
@@ -259,15 +263,16 @@ $("#proyectosGrid").addEventListener("click", e => {
 function aplicarAdmin() {
     $$(".admin-only").forEach(el => el.hidden = !modoAdmin);
     const t = $("#adminToggle");
+    t.hidden = !modoAdmin;   // los visitantes no ven el botón
     t.innerHTML = modoAdmin ? '<i class="fa-solid fa-lock-open"></i> <span>Salir de admin</span>'
                             : '<i class="fa-solid fa-lock"></i> <span>Administrar</span>';
     renderProyectos();
 }
+
 $("#adminToggle").addEventListener("click", () => {
-    modoAdmin = !modoAdmin;
-    store.set(CLAVE_ADMIN, modoAdmin ? "1" : "0");
+    modoAdmin = false;
+    store.del(CLAVE_ADMIN);
     aplicarAdmin();
-    if (modoAdmin) $("#proyectos").scrollIntoView({ behavior: "smooth" });
 });
 
 /* ---------- Modal crear / editar ---------- */
